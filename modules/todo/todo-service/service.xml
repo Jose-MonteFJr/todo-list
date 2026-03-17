@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<!DOCTYPE service-builder PUBLIC
+		"-//Liferay//DTD Service Builder 7.4.0//EN"
+		"http://www.liferay.com/dtd/liferay-service-builder_7_4_0.dtd">
+
+<service-builder dependency-injector="osgi" package-path="com.todo.list">
+	<namespace>Todo</namespace>
+
+	<entity name="Task" local-service="true" remote-service="false">
+		<column name="taskId" type="long" primary="true"/>
+
+		<column name="groupId" type="long"/>
+		<column name="companyId" type="long"/>
+		<column name="userId" type="long"/>
+		<column name="userName" type="String"/>
+
+		<column name="createDate" type="Date"/>
+		<column name="modifiedDate" type="Date"/>
+
+		<column name="title" type="String"/>
+		<column name="description" type="String"/>
+		<column name="completed" type="boolean"/>
+		<column name="deleted" type="boolean"/>
+
+		<finder name="G_U" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="userId" />
+		</finder>
+
+		<finder name="G_U_C" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="userId" />
+			<finder-column name="completed" />
+		</finder>
+	</entity>
+
+	<entity name="SubTask" local-service="true" remote-service="false">
+		<column name="subTaskId" type="long" primary="true"/>
+		<column name="taskId" type="long"/>
+
+		<column name="title" type="String"/>
+		<column name="completed" type="boolean"/>
+		<column name="deleted" type="boolean"/>
+		<column name="position" type="int"/>
+
+		<column name="createDate" type="Date"/>
+		<column name="modifiedDate" type="Date"/>
+
+		<finder name="TaskId" return-type="Collection">
+			<finder-column name="taskId" />
+		</finder>
+	</entity>
+
+	<entity name="TaskAttachment" local-service="true" remote-service="false">
+		<column name="taskAttachmentId" type="long" primary="true"/>
+		<column name="taskId" type="long"/>
+		<column name="fileEntryId" type="long"/>
+		<column name="createDate" type="Date"/>
+
+		<finder name="TaskId" return-type="Collection">
+			<finder-column name="taskId" />
+		</finder>
+	</entity>
+</service-builder>

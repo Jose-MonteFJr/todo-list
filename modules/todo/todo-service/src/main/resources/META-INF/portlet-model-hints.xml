@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.todo.list.model.SubTask">
+		<field name="subTaskId" type="long" />
+		<field name="taskId" type="long" />
+		<field name="title" type="String" />
+		<field name="completed" type="boolean" />
+		<field name="deleted" type="boolean" />
+		<field name="position" type="int" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+	</model>
+	<model name="com.todo.list.model.Task">
+		<field name="taskId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="title" type="String" />
+		<field name="description" type="String" />
+		<field name="completed" type="boolean" />
+		<field name="deleted" type="boolean" />
+	</model>
+	<model name="com.todo.list.model.TaskAttachment">
+		<field name="taskAttachmentId" type="long" />
+		<field name="taskId" type="long" />
+		<field name="fileEntryId" type="long" />
+		<field name="createDate" type="Date" />
+	</model>
+</model-hints>

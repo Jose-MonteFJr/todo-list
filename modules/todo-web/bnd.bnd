@@ -1,0 +1,7 @@
+Bundle-Name: todo-web
+Bundle-SymbolicName: com.todo.list.web
+Bundle-Version: 1.0.0
+Export-Package: com.todo.list.web.constants
+Provide-Capability:\
+	liferay.language.resources;\
+		resource.bundle.base.name="content.Language"

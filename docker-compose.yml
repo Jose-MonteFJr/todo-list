@@ -1,0 +1,32 @@
+services:
+  db:
+    image: postgres:13
+    container_name: postgres-db
+    environment:
+      - POSTGRES_DB=lportal
+      - POSTGRES_USER=liferay
+      - POSTGRES_PASSWORD=liferay
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+
+  liferay:
+    image: liferay/portal:7.4.3.132-ga132
+    container_name: liferay-portal
+    environment:
+      - JAVA_VERSION=zulu21
+      - LIFERAY_SETUP_PERIOD_WIZARD_PERIOD_ENABLED=false
+      - LIFERAY_JDBC_PERIOD_DEFAULT_PERIOD_DRIVER_UPPERCASEC_LASS_UPPERCASEN_AME=org.postgresql.Driver
+      - LIFERAY_JDBC_PERIOD_DEFAULT_PERIOD_URL=jdbc:postgresql://db:5432/lportal
+      - LIFERAY_JDBC_PERIOD_DEFAULT_PERIOD_USERNAME=liferay
+      - LIFERAY_JDBC_PERIOD_DEFAULT_PERIOD_PASSWORD=liferay
+    ports:
+      - "8080:8080"
+      - "11311:11311"
+    volumes:
+      - ./bundles/deploy:/opt/liferay/deploy
+      - ./bundles/osgi/configs:/opt/liferay/osgi/configs
+    depends_on:
+      - db
+

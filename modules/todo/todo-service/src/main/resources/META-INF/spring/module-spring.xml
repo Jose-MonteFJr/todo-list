@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+
+<beans
+	default-destroy-method="destroy"
+	default-init-method="afterPropertiesSet"
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+>
+	<bean class="com.todo.list.service.impl.SubTaskLocalServiceImpl" id="com.todo.list.service.SubTaskLocalService" />
+	<bean class="com.todo.list.service.persistence.impl.SubTaskModelArgumentsResolver" id="com.todo.list.service.persistence.impl.SubTaskModelArgumentsResolver" />
+	<bean class="com.todo.list.service.persistence.impl.SubTaskPersistenceImpl" id="com.todo.list.service.persistence.SubTaskPersistence" />
+	<bean class="com.todo.list.service.impl.TaskLocalServiceImpl" id="com.todo.list.service.TaskLocalService" />
+	<bean class="com.todo.list.service.persistence.impl.TaskModelArgumentsResolver" id="com.todo.list.service.persistence.impl.TaskModelArgumentsResolver" />
+	<bean class="com.todo.list.service.persistence.impl.TaskPersistenceImpl" id="com.todo.list.service.persistence.TaskPersistence" />
+	<bean class="com.todo.list.service.impl.TaskAttachmentLocalServiceImpl" id="com.todo.list.service.TaskAttachmentLocalService" />
+	<bean class="com.todo.list.service.persistence.impl.TaskAttachmentModelArgumentsResolver" id="com.todo.list.service.persistence.impl.TaskAttachmentModelArgumentsResolver" />
+	<bean class="com.todo.list.service.persistence.impl.TaskAttachmentPersistenceImpl" id="com.todo.list.service.persistence.TaskAttachmentPersistence" />
+</beans>

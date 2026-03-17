@@ -1,0 +1,8 @@
+Bundle-Name: todo-api
+Bundle-SymbolicName: com.todo.list.api
+Bundle-Version: 1.0.0
+Export-Package: \
+	com.todo.list.exception,\
+	com.todo.list.model,\
+	com.todo.list.service,\
+	com.todo.list.service.persistence

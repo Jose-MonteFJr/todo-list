@@ -1,1 +1,7 @@
 // Check GETTING_STARTED.md for information regarding usage.
+allprojects {
+    tasks.withType(JavaCompile) {
+        sourceCompatibility = "17"
+        targetCompatibility = "17"
+    }
+}
