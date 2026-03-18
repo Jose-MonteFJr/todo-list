@@ -55,7 +55,8 @@ public interface SubTaskLocalService
 	 *
 	 * Never modify this interface directly. Add custom service methods to <code>com.todo.list.service.impl.SubTaskLocalServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface. Consume the sub task local service via injection or a <code>org.osgi.util.tracker.ServiceTracker</code>. Use {@link SubTaskLocalServiceUtil} if injection and service tracking are not available.
 	 */
-	public SubTask addSubTask(long taskId, String title, int position);
+	public SubTask addSubTask(long taskId, String title, int position)
+		throws PortalException;
 
 	/**
 	 * Adds the sub task to the database. Also notifies the appropriate model listeners.

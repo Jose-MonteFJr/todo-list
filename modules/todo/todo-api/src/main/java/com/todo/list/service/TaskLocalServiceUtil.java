@@ -37,8 +37,9 @@ public class TaskLocalServiceUtil {
 	 * Never modify this class directly. Add custom service methods to <code>com.todo.list.service.impl.TaskLocalServiceImpl</code> and rerun ServiceBuilder to regenerate this class.
 	 */
 	public static Task addCustomTask(
-		long groupId, long companyId, long userId, String userName,
-		String title, String description) {
+			long groupId, long companyId, long userId, String userName,
+			String title, String description)
+		throws PortalException {
 
 		return getService().addCustomTask(
 			groupId, companyId, userId, userName, title, description);

@@ -28,8 +28,9 @@ public class TaskLocalServiceWrapper
 
 	@Override
 	public com.todo.list.model.Task addCustomTask(
-		long groupId, long companyId, long userId, String userName,
-		String title, String description) {
+			long groupId, long companyId, long userId, String userName,
+			String title, String description)
+		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _taskLocalService.addCustomTask(
 			groupId, companyId, userId, userName, title, description);

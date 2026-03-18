@@ -12,7 +12,7 @@
 
 	<div class="card p-3 mb-4">
 		<aui:form action="<%= addTaskURL %>" method="post">
-			<aui:input name="title" label="Título da Tarefa" required="true" cssClass="form-control" />
+			<aui:input name="title" label="Título da tarefa" required="true" cssClass="form-control" />
 			<aui:input name="description" label="Descrição" type="textarea" cssClass="form-control" />
 			<aui:button type="submit" value="Adicionar Tarefa" cssClass="btn btn-primary mt-2" />
 		</aui:form>
@@ -24,18 +24,21 @@
 			<p class="mt-3"><strong>Total de tarefas pendentes: <%= pendingTasks.size() %></strong></p>
 
 			<ul class="list-group">
-				<% for(Task task : pendingTasks) { %>
-				<li class="list-group-item flex-column align-items-start">
+				<% for(Task task : pendingTasks) {
+					// 1. BUSCA AS SUBTASKS DA TAREFA ATUAL
+					List<SubTask> subTasks = SubTaskLocalServiceUtil.getActiveSubTasks(task.getTaskId());
+				%>
+				<li class="list-group-item flex-column align-items-start mb-3 border">
 					<div class="d-flex justify-content-between w-100">
 						<div>
-							<h5><%= task.getTitle() %></h5>
-							<small><%= task.getDescription() %></small>
+							<h4><%= task.getTitle() %></h4>
+							<p class="text-muted"><%= task.getDescription() %></p>
 						</div>
 						<div>
 							<portlet:actionURL name="toggleTaskStatus" var="completeTaskURL">
 								<portlet:param name="taskId" value="<%= String.valueOf(task.getTaskId()) %>" />
 							</portlet:actionURL>
-							<a href="<%= completeTaskURL %>" class="btn btn-sm btn-success">Concluir</a>
+							<a href="<%= completeTaskURL %>" class="btn btn-sm btn-success">Concluir Tarefa</a>
 
 							<portlet:actionURL name="deleteTask" var="deleteTaskURL">
 								<portlet:param name="taskId" value="<%= String.valueOf(task.getTaskId()) %>" />
@@ -44,21 +47,70 @@
 						</div>
 					</div>
 
-					<details class="mt-3 p-3 border bg-light w-100">
-						<summary class="text-primary" style="cursor: pointer;"><strong>✏️ Editar esta tarefa</strong></summary>
+					<hr>
 
+					<div class="ml-4">
+						<h6>Checklist:</h6>
+						<ul class="list-unstyled">
+							<% for(SubTask sub : subTasks) { %>
+							<li class="mb-2">
+								<div class="d-flex align-items-center">
+									<portlet:actionURL name="toggleSubTaskStatus" var="toggleSubURL">
+										<portlet:param name="subTaskId" value="<%= String.valueOf(sub.getSubTaskId()) %>" />
+									</portlet:actionURL>
+
+									<a href="<%= toggleSubURL %>" class="mr-2">
+										<%= sub.getCompleted() ? "Concluida" : "A fazer" %>
+									</a>
+
+									<span style="<%= sub.getCompleted() ? "text-decoration: line-through; color: gray;" : "" %>">
+                            <%= sub.getTitle() %>
+                        </span>
+
+									<portlet:actionURL name="deleteSubTask" var="delSubURL">
+										<portlet:param name="subTaskId" value="<%= String.valueOf(sub.getSubTaskId()) %>" />
+									</portlet:actionURL>
+									<a href="<%= delSubURL %>" class="ml-2 text-danger" style="font-size: 0.8rem;">(excluir)</a>
+								</div>
+
+								<details class="ml-4 mt-1">
+									<summary class="text-info" style="cursor: pointer; font-size: 0.75rem;">Editar nome</summary>
+
+									<portlet:actionURL name="updateSubTask" var="updateSubTaskURL">
+										<portlet:param name="subTaskId" value="<%= String.valueOf(sub.getSubTaskId()) %>" />
+									</portlet:actionURL>
+
+									<aui:form action="<%= updateSubTaskURL %>" method="post" cssClass="form-inline mt-1">
+										<aui:input name="title" label="" value="<%= sub.getTitle() %>" cssClass="form-control form-control-sm" inlineField="<%= true %>" />
+										<aui:button type="submit" value="Salvar" cssClass="btn btn-sm btn-outline-info ml-1" />
+									</aui:form>
+								</details>
+							</li>
+							<% } %>
+						</ul>
+
+						<portlet:actionURL name="addSubTask" var="addSubTaskURL" />
+						<aui:form action="<%= addSubTaskURL %>" method="post" cssClass="form-inline mt-2">
+							<aui:input name="taskId" type="hidden" value="<%= task.getTaskId() %>" />
+							<aui:input name="title" label="" placeholder="Nova sub-tarefa..." cssClass="form-control form-control-sm" inlineField="<%= true %>" />
+							<aui:button type="submit" value="+" cssClass="btn btn-sm btn-secondary ml-1" />
+						</aui:form>
+					</div>
+
+					<details class="mt-3 p-2 border bg-light">
+						<summary class="text-primary" style="cursor: pointer; font-size: 0.8rem;">Editar Detalhes da Tarefa</summary>
 						<portlet:actionURL name="updateTask" var="updateTaskURL">
 							<portlet:param name="taskId" value="<%= String.valueOf(task.getTaskId()) %>" />
 						</portlet:actionURL>
-
-						<aui:form action="<%= updateTaskURL %>" method="post" cssClass="mt-2" name='<%= "fmEdit" + task.getTaskId() %>'>
-							<aui:input name="title" id='<%= "title" + task.getTaskId() %>' label="Título" value="<%= task.getTitle() %>" required="true" />
-							<aui:input name="description" id='<%= "desc" + task.getTaskId() %>' label="Descrição" type="textarea" value="<%= task.getDescription() %>" />
-							<aui:button type="submit" value="Salvar Alterações" cssClass="btn btn-sm btn-primary" />
+						<aui:form action="<%= updateTaskURL %>" method="post" cssClass="mt-2">
+							<aui:input name="title" label="Título" value="<%= task.getTitle() %>" />
+							<aui:input name="description" label="Descrição" type="textarea" value="<%= task.getDescription() %>" />
+							<aui:button type="submit" value="Salvar" cssClass="btn btn-sm btn-primary" />
 						</aui:form>
 					</details>
 				</li>
-				<% } %> </ul>
+				<% } %>
+			</ul>
 		</liferay-ui:section>
 
 		<liferay-ui:section>

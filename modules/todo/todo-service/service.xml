@@ -88,4 +88,10 @@
 			<finder-column name="deleted" />
 		</finder>
 	</entity>
+
+	<exceptions>
+		<exception>TaskTitle</exception>
+		<exception>TaskDescription</exception>
+		<exception>SubTaskTitle</exception>
+	</exceptions>
 </service-builder>

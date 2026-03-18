@@ -28,7 +28,8 @@ public class SubTaskLocalServiceWrapper
 
 	@Override
 	public com.todo.list.model.SubTask addSubTask(
-		long taskId, String title, int position) {
+			long taskId, String title, int position)
+		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _subTaskLocalService.addSubTask(taskId, title, position);
 	}

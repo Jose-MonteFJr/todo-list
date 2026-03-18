@@ -36,7 +36,9 @@ public class SubTaskLocalServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to <code>com.todo.list.service.impl.SubTaskLocalServiceImpl</code> and rerun ServiceBuilder to regenerate this class.
 	 */
-	public static SubTask addSubTask(long taskId, String title, int position) {
+	public static SubTask addSubTask(long taskId, String title, int position)
+		throws PortalException {
+
 		return getService().addSubTask(taskId, title, position);
 	}
 

@@ -21,6 +21,7 @@ services:
       - LIFERAY_JDBC_PERIOD_DEFAULT_PERIOD_URL=jdbc:postgresql://db:5432/lportal
       - LIFERAY_JDBC_PERIOD_DEFAULT_PERIOD_USERNAME=liferay
       - LIFERAY_JDBC_PERIOD_DEFAULT_PERIOD_PASSWORD=liferay
+      - JAVA_OPTS=-Dfile.encoding=UTF-8 -Duser.timezone=GMT-3
     ports:
       - "8080:8080"
       - "11311:11311"

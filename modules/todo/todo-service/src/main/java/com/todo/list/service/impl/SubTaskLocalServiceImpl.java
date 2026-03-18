@@ -12,6 +12,9 @@ import com.todo.list.service.base.SubTaskLocalServiceBaseImpl;
 import java.util.Date;
 import java.util.List;
 
+import com.liferay.portal.kernel.util.Validator;
+import com.todo.list.exception.SubTaskTitleException;
+
 /**
  * @author Brian Wing Shun Chan
  */
@@ -19,7 +22,9 @@ import java.util.List;
 public class SubTaskLocalServiceImpl extends SubTaskLocalServiceBaseImpl {
 
     // CRIAR: Adiciona uma nova sub-tarefa vinculada a uma Tarefa Pai
-    public SubTask addSubTask(long taskId, String title, int position) {
+    public SubTask addSubTask(long taskId, String title, int position) throws PortalException {
+        validate(title);
+
         long subTaskId = counterLocalService.increment(SubTask.class.getName());
         SubTask subTask = super.createSubTask(subTaskId);
 
@@ -47,6 +52,8 @@ public class SubTaskLocalServiceImpl extends SubTaskLocalServiceBaseImpl {
 
     // EDITAR: Atualiza o título da sub-tarefa
     public SubTask updateSubTask(long subTaskId, String title) throws PortalException {
+        validate(title);
+
         SubTask subTask = super.getSubTask(subTaskId);
 
         subTask.setTitle(title);
@@ -75,5 +82,11 @@ public class SubTaskLocalServiceImpl extends SubTaskLocalServiceBaseImpl {
         subTask.setModifiedDate(new Date());
 
         return super.updateSubTask(subTask);
+    }
+
+    protected void validate(String title) throws PortalException {
+        if (Validator.isNull(title) || Validator.isBlank(title)) {
+            throw new SubTaskTitleException();
+        }
     }
 }

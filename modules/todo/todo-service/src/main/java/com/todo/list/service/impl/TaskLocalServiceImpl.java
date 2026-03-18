@@ -12,13 +12,18 @@ import com.todo.list.service.base.TaskLocalServiceBaseImpl;
 import java.util.Date;
 import java.util.List;
 
+import com.liferay.portal.kernel.util.Validator;
+import com.todo.list.exception.TaskTitleException;
+
 /**
  * @author Brian Wing Shun Chan
  */
 public class TaskLocalServiceImpl extends TaskLocalServiceBaseImpl {
     // Adiciona uma nova tarefa garantindo a injeção correta de IDs e datas.
 
-    public Task addCustomTask(long groupId, long companyId, long userId, String userName, String title, String description) {
+    public Task addCustomTask(long groupId, long companyId, long userId, String userName, String title, String description) throws PortalException {
+        validate(title);
+
         long taskId = counterLocalService.increment(Task.class.getName());
         Task task = super.createTask(taskId);
 
@@ -50,6 +55,8 @@ public class TaskLocalServiceImpl extends TaskLocalServiceBaseImpl {
 
     // Edita as tarefas criadas
     public Task updateCustomTask(long taskId, String title, String description) throws PortalException {
+        validate(title);
+
         Task task = super.getTask(taskId);
 
         task.setTitle(title);
@@ -81,5 +88,12 @@ public class TaskLocalServiceImpl extends TaskLocalServiceBaseImpl {
         task.setModifiedDate(new Date());
 
         return super.updateTask(task);
+    }
+
+    // Validação
+    protected void validate(String title) throws PortalException {
+        if (Validator.isNull(title) || Validator.isBlank(title)) {
+            throw new TaskTitleException();
+        }
     }
 }
