@@ -177,6 +177,161 @@ public interface TaskAttachmentPersistence
 	public int countByTaskId(long taskId);
 
 	/**
+	 * Returns all the task attachments where taskId = &#63; and deleted = &#63;.
+	 *
+	 * @param taskId the task ID
+	 * @param deleted the deleted
+	 * @return the matching task attachments
+	 */
+	public java.util.List<TaskAttachment> findByT_D(
+		long taskId, boolean deleted);
+
+	/**
+	 * Returns a range of all the task attachments where taskId = &#63; and deleted = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>TaskAttachmentModelImpl</code>.
+	 * </p>
+	 *
+	 * @param taskId the task ID
+	 * @param deleted the deleted
+	 * @param start the lower bound of the range of task attachments
+	 * @param end the upper bound of the range of task attachments (not inclusive)
+	 * @return the range of matching task attachments
+	 */
+	public java.util.List<TaskAttachment> findByT_D(
+		long taskId, boolean deleted, int start, int end);
+
+	/**
+	 * Returns an ordered range of all the task attachments where taskId = &#63; and deleted = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>TaskAttachmentModelImpl</code>.
+	 * </p>
+	 *
+	 * @param taskId the task ID
+	 * @param deleted the deleted
+	 * @param start the lower bound of the range of task attachments
+	 * @param end the upper bound of the range of task attachments (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching task attachments
+	 */
+	public java.util.List<TaskAttachment> findByT_D(
+		long taskId, boolean deleted, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<TaskAttachment>
+			orderByComparator);
+
+	/**
+	 * Returns an ordered range of all the task attachments where taskId = &#63; and deleted = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>TaskAttachmentModelImpl</code>.
+	 * </p>
+	 *
+	 * @param taskId the task ID
+	 * @param deleted the deleted
+	 * @param start the lower bound of the range of task attachments
+	 * @param end the upper bound of the range of task attachments (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the ordered range of matching task attachments
+	 */
+	public java.util.List<TaskAttachment> findByT_D(
+		long taskId, boolean deleted, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<TaskAttachment>
+			orderByComparator,
+		boolean useFinderCache);
+
+	/**
+	 * Returns the first task attachment in the ordered set where taskId = &#63; and deleted = &#63;.
+	 *
+	 * @param taskId the task ID
+	 * @param deleted the deleted
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching task attachment
+	 * @throws NoSuchTaskAttachmentException if a matching task attachment could not be found
+	 */
+	public TaskAttachment findByT_D_First(
+			long taskId, boolean deleted,
+			com.liferay.portal.kernel.util.OrderByComparator<TaskAttachment>
+				orderByComparator)
+		throws NoSuchTaskAttachmentException;
+
+	/**
+	 * Returns the first task attachment in the ordered set where taskId = &#63; and deleted = &#63;.
+	 *
+	 * @param taskId the task ID
+	 * @param deleted the deleted
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching task attachment, or <code>null</code> if a matching task attachment could not be found
+	 */
+	public TaskAttachment fetchByT_D_First(
+		long taskId, boolean deleted,
+		com.liferay.portal.kernel.util.OrderByComparator<TaskAttachment>
+			orderByComparator);
+
+	/**
+	 * Returns the last task attachment in the ordered set where taskId = &#63; and deleted = &#63;.
+	 *
+	 * @param taskId the task ID
+	 * @param deleted the deleted
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching task attachment
+	 * @throws NoSuchTaskAttachmentException if a matching task attachment could not be found
+	 */
+	public TaskAttachment findByT_D_Last(
+			long taskId, boolean deleted,
+			com.liferay.portal.kernel.util.OrderByComparator<TaskAttachment>
+				orderByComparator)
+		throws NoSuchTaskAttachmentException;
+
+	/**
+	 * Returns the last task attachment in the ordered set where taskId = &#63; and deleted = &#63;.
+	 *
+	 * @param taskId the task ID
+	 * @param deleted the deleted
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching task attachment, or <code>null</code> if a matching task attachment could not be found
+	 */
+	public TaskAttachment fetchByT_D_Last(
+		long taskId, boolean deleted,
+		com.liferay.portal.kernel.util.OrderByComparator<TaskAttachment>
+			orderByComparator);
+
+	/**
+	 * Returns the task attachments before and after the current task attachment in the ordered set where taskId = &#63; and deleted = &#63;.
+	 *
+	 * @param taskAttachmentId the primary key of the current task attachment
+	 * @param taskId the task ID
+	 * @param deleted the deleted
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next task attachment
+	 * @throws NoSuchTaskAttachmentException if a task attachment with the primary key could not be found
+	 */
+	public TaskAttachment[] findByT_D_PrevAndNext(
+			long taskAttachmentId, long taskId, boolean deleted,
+			com.liferay.portal.kernel.util.OrderByComparator<TaskAttachment>
+				orderByComparator)
+		throws NoSuchTaskAttachmentException;
+
+	/**
+	 * Removes all the task attachments where taskId = &#63; and deleted = &#63; from the database.
+	 *
+	 * @param taskId the task ID
+	 * @param deleted the deleted
+	 */
+	public void removeByT_D(long taskId, boolean deleted);
+
+	/**
+	 * Returns the number of task attachments where taskId = &#63; and deleted = &#63;.
+	 *
+	 * @param taskId the task ID
+	 * @param deleted the deleted
+	 * @return the number of matching task attachments
+	 */
+	public int countByT_D(long taskId, boolean deleted);
+
+	/**
 	 * Caches the task attachment in the entity cache if it is enabled.
 	 *
 	 * @param taskAttachment the task attachment

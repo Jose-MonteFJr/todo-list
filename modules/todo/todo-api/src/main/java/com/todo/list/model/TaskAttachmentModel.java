@@ -101,6 +101,41 @@ public interface TaskAttachmentModel extends BaseModel<TaskAttachment> {
 	 */
 	public void setCreateDate(Date createDate);
 
+	/**
+	 * Returns the modified date of this task attachment.
+	 *
+	 * @return the modified date of this task attachment
+	 */
+	public Date getModifiedDate();
+
+	/**
+	 * Sets the modified date of this task attachment.
+	 *
+	 * @param modifiedDate the modified date of this task attachment
+	 */
+	public void setModifiedDate(Date modifiedDate);
+
+	/**
+	 * Returns the deleted of this task attachment.
+	 *
+	 * @return the deleted of this task attachment
+	 */
+	public boolean getDeleted();
+
+	/**
+	 * Returns <code>true</code> if this task attachment is deleted.
+	 *
+	 * @return <code>true</code> if this task attachment is deleted; <code>false</code> otherwise
+	 */
+	public boolean isDeleted();
+
+	/**
+	 * Sets whether this task attachment is deleted.
+	 *
+	 * @param deleted the deleted of this task attachment
+	 */
+	public void setDeleted(boolean deleted);
+
 	@Override
 	public TaskAttachment cloneWithOriginalValues();
 

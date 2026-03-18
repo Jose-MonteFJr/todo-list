@@ -128,23 +128,29 @@ public class TaskModelImpl extends BaseModelImpl<Task> implements TaskModel {
 	 * @deprecated As of Athanasius (7.3.x), replaced by {@link #getColumnBitmask(String)}
 	 */
 	@Deprecated
-	public static final long GROUPID_COLUMN_BITMASK = 2L;
+	public static final long DELETED_COLUMN_BITMASK = 2L;
 
 	/**
 	 * @deprecated As of Athanasius (7.3.x), replaced by {@link #getColumnBitmask(String)}
 	 */
 	@Deprecated
-	public static final long USERID_COLUMN_BITMASK = 4L;
+	public static final long GROUPID_COLUMN_BITMASK = 4L;
+
+	/**
+	 * @deprecated As of Athanasius (7.3.x), replaced by {@link #getColumnBitmask(String)}
+	 */
+	@Deprecated
+	public static final long USERID_COLUMN_BITMASK = 8L;
 
 	/**
 	 * @deprecated As of Athanasius (7.3.x), replaced by {@link
 	 *		#getColumnBitmask(String)}
 	 */
 	@Deprecated
-	public static final long TASKID_COLUMN_BITMASK = 8L;
+	public static final long TASKID_COLUMN_BITMASK = 16L;
 
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(
-		com.liferay.todo.service.util.ServiceProps.get(
+		com.liferay.todo.com.todo.list.service.util.ServiceProps.get(
 			"lock.expiration.time.com.todo.list.model.Task"));
 
 	public TaskModelImpl() {
@@ -519,6 +525,16 @@ public class TaskModelImpl extends BaseModelImpl<Task> implements TaskModel {
 		}
 
 		_deleted = deleted;
+	}
+
+	/**
+	 * @deprecated As of Athanasius (7.3.x), replaced by {@link
+	 *             #getColumnOriginalValue(String)}
+	 */
+	@Deprecated
+	public boolean getOriginalDeleted() {
+		return GetterUtil.getBoolean(
+			this.<Boolean>getColumnOriginalValue("deleted"));
 	}
 
 	public long getColumnBitmask() {

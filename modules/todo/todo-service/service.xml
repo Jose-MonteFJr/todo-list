@@ -32,6 +32,19 @@
 			<finder-column name="userId" />
 			<finder-column name="completed" />
 		</finder>
+
+		<finder name="G_U_D" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="userId" />
+			<finder-column name="deleted" />
+		</finder>
+
+		<finder name="G_U_C_D" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="userId" />
+			<finder-column name="completed" />
+			<finder-column name="deleted" />
+		</finder>
 	</entity>
 
 	<entity name="SubTask" local-service="true" remote-service="false">
@@ -49,16 +62,30 @@
 		<finder name="TaskId" return-type="Collection">
 			<finder-column name="taskId" />
 		</finder>
+
+		<finder name="T_D" return-type="Collection">
+			<finder-column name="taskId" />
+			<finder-column name="deleted" />
+		</finder>
 	</entity>
 
 	<entity name="TaskAttachment" local-service="true" remote-service="false">
 		<column name="taskAttachmentId" type="long" primary="true"/>
 		<column name="taskId" type="long"/>
 		<column name="fileEntryId" type="long"/>
+
 		<column name="createDate" type="Date"/>
+		<column name="modifiedDate" type="Date"/>
+
+		<column name="deleted" type="boolean"/>
 
 		<finder name="TaskId" return-type="Collection">
 			<finder-column name="taskId" />
+		</finder>
+
+		<finder name="T_D" return-type="Collection">
+			<finder-column name="taskId" />
+			<finder-column name="deleted" />
 		</finder>
 	</entity>
 </service-builder>

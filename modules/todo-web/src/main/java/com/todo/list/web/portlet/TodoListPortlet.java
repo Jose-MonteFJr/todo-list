@@ -37,9 +37,9 @@ public class TodoListPortlet extends MVCPortlet {
 	@Reference
 	private TaskLocalService _taskLocalService;
 
-	/**
-	 * AÇÃO: Adicionar uma nova tarefa
-	 */
+
+	// AÇÃO: Adicionar uma nova tarefa
+
 	public void addTask(ActionRequest actionRequest, ActionResponse actionResponse) throws PortalException {
 
 		// O ThemeDisplay é a ferramenta de segurança do Liferay. Ele garante
@@ -61,17 +61,17 @@ public class TodoListPortlet extends MVCPortlet {
 		);
 	}
 
-	/**
-	 * AÇÃO: Excluir uma tarefa
-	 */
+
+	 // AÇÃO: Excluir uma tarefa
+
 	public void deleteTask(ActionRequest actionRequest, ActionResponse actionResponse) throws PortalException {
 		long taskId = ParamUtil.getLong(actionRequest, "taskId");
 		_taskLocalService.deleteTask(taskId);
 	}
 
-	/**
-	 * AÇÃO: Alternar entre Concluída e Pendente
-	 */
+
+	 // AÇÃO: Alternar entre Concluída e Pendente
+
 	public void toggleTaskStatus(ActionRequest actionRequest, ActionResponse actionResponse) throws PortalException {
 		long taskId = ParamUtil.getLong(actionRequest, "taskId");
 		_taskLocalService.toggleTaskStatus(taskId);

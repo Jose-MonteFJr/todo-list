@@ -55,10 +55,6 @@ public interface TaskLocalService
 	 *
 	 * Never modify this interface directly. Add custom service methods to <code>com.todo.list.service.impl.TaskLocalServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface. Consume the task local service via injection or a <code>org.osgi.util.tracker.ServiceTracker</code>. Use {@link TaskLocalServiceUtil} if injection and service tracking are not available.
 	 */
-
-	/**
-	 * Adiciona uma nova tarefa garantindo a injeção correta de IDs e datas.
-	 */
 	public Task addCustomTask(
 		long groupId, long companyId, long userId, String userName,
 		String title, String description);
@@ -245,9 +241,6 @@ public interface TaskLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<Task> getTasks(int start, int end);
 
-	/**
-	 * Busca as tarefas de um usuário filtrando pelo status de conclusão
-	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<Task> getTasksByStatus(
 		long groupId, long userId, boolean completed);
@@ -260,10 +253,10 @@ public interface TaskLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getTasksCount();
 
-	/**
-	 * Alterna o status da tarefa entre Concluída (true) e Pendente (false)
-	 */
 	public Task toggleTaskStatus(long taskId) throws PortalException;
+
+	public Task updateCustomTask(long taskId, String title, String description)
+		throws PortalException;
 
 	/**
 	 * Updates the task in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.

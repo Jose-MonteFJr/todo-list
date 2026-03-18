@@ -176,6 +176,26 @@ public class TaskPersistenceTest {
 	}
 
 	@Test
+	public void testCountByG_U_D() throws Exception {
+		_persistence.countByG_U_D(
+			RandomTestUtil.nextLong(), RandomTestUtil.nextLong(),
+			RandomTestUtil.randomBoolean());
+
+		_persistence.countByG_U_D(0L, 0L, RandomTestUtil.randomBoolean());
+	}
+
+	@Test
+	public void testCountByG_U_C_D() throws Exception {
+		_persistence.countByG_U_C_D(
+			RandomTestUtil.nextLong(), RandomTestUtil.nextLong(),
+			RandomTestUtil.randomBoolean(), RandomTestUtil.randomBoolean());
+
+		_persistence.countByG_U_C_D(
+			0L, 0L, RandomTestUtil.randomBoolean(),
+			RandomTestUtil.randomBoolean());
+	}
+
+	@Test
 	public void testFindByPrimaryKeyExisting() throws Exception {
 		Task newTask = addTask();
 

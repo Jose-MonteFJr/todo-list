@@ -33,6 +33,10 @@ public class TaskAttachmentTable extends BaseTable<TaskAttachmentTable> {
 		"fileEntryId", Long.class, Types.BIGINT, Column.FLAG_DEFAULT);
 	public final Column<TaskAttachmentTable, Date> createDate = createColumn(
 		"createDate", Date.class, Types.TIMESTAMP, Column.FLAG_DEFAULT);
+	public final Column<TaskAttachmentTable, Date> modifiedDate = createColumn(
+		"modifiedDate", Date.class, Types.TIMESTAMP, Column.FLAG_DEFAULT);
+	public final Column<TaskAttachmentTable, Boolean> deleted = createColumn(
+		"deleted", Boolean.class, Types.BOOLEAN, Column.FLAG_DEFAULT);
 
 	private TaskAttachmentTable() {
 		super("Todo_TaskAttachment", TaskAttachmentTable::new);

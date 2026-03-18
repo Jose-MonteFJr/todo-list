@@ -59,7 +59,8 @@ public class TaskAttachmentModelImpl
 
 	public static final Object[][] TABLE_COLUMNS = {
 		{"taskAttachmentId", Types.BIGINT}, {"taskId", Types.BIGINT},
-		{"fileEntryId", Types.BIGINT}, {"createDate", Types.TIMESTAMP}
+		{"fileEntryId", Types.BIGINT}, {"createDate", Types.TIMESTAMP},
+		{"modifiedDate", Types.TIMESTAMP}, {"deleted", Types.BOOLEAN}
 	};
 
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP =
@@ -70,10 +71,12 @@ public class TaskAttachmentModelImpl
 		TABLE_COLUMNS_MAP.put("taskId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("fileEntryId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("createDate", Types.TIMESTAMP);
+		TABLE_COLUMNS_MAP.put("modifiedDate", Types.TIMESTAMP);
+		TABLE_COLUMNS_MAP.put("deleted", Types.BOOLEAN);
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table Todo_TaskAttachment (taskAttachmentId LONG not null primary key,taskId LONG,fileEntryId LONG,createDate DATE null)";
+		"create table Todo_TaskAttachment (taskAttachmentId LONG not null primary key,taskId LONG,fileEntryId LONG,createDate DATE null,modifiedDate DATE null,deleted BOOLEAN)";
 
 	public static final String TABLE_SQL_DROP =
 		"drop table Todo_TaskAttachment";
@@ -112,17 +115,23 @@ public class TaskAttachmentModelImpl
 	 * @deprecated As of Athanasius (7.3.x), replaced by {@link #getColumnBitmask(String)}
 	 */
 	@Deprecated
-	public static final long TASKID_COLUMN_BITMASK = 1L;
+	public static final long DELETED_COLUMN_BITMASK = 1L;
+
+	/**
+	 * @deprecated As of Athanasius (7.3.x), replaced by {@link #getColumnBitmask(String)}
+	 */
+	@Deprecated
+	public static final long TASKID_COLUMN_BITMASK = 2L;
 
 	/**
 	 * @deprecated As of Athanasius (7.3.x), replaced by {@link
 	 *		#getColumnBitmask(String)}
 	 */
 	@Deprecated
-	public static final long TASKATTACHMENTID_COLUMN_BITMASK = 2L;
+	public static final long TASKATTACHMENTID_COLUMN_BITMASK = 4L;
 
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(
-		com.liferay.todo.service.util.ServiceProps.get(
+		com.liferay.todo.com.todo.list.service.util.ServiceProps.get(
 			"lock.expiration.time.com.todo.list.model.TaskAttachment"));
 
 	public TaskAttachmentModelImpl() {
@@ -228,6 +237,9 @@ public class TaskAttachmentModelImpl
 				"fileEntryId", TaskAttachment::getFileEntryId);
 			attributeGetterFunctions.put(
 				"createDate", TaskAttachment::getCreateDate);
+			attributeGetterFunctions.put(
+				"modifiedDate", TaskAttachment::getModifiedDate);
+			attributeGetterFunctions.put("deleted", TaskAttachment::getDeleted);
 
 			_attributeGetterFunctions = Collections.unmodifiableMap(
 				attributeGetterFunctions);
@@ -260,6 +272,14 @@ public class TaskAttachmentModelImpl
 				"createDate",
 				(BiConsumer<TaskAttachment, Date>)
 					TaskAttachment::setCreateDate);
+			attributeSetterBiConsumers.put(
+				"modifiedDate",
+				(BiConsumer<TaskAttachment, Date>)
+					TaskAttachment::setModifiedDate);
+			attributeSetterBiConsumers.put(
+				"deleted",
+				(BiConsumer<TaskAttachment, Boolean>)
+					TaskAttachment::setDeleted);
 
 			_attributeSetterBiConsumers = Collections.unmodifiableMap(
 				(Map)attributeSetterBiConsumers);
@@ -332,6 +352,55 @@ public class TaskAttachmentModelImpl
 		_createDate = createDate;
 	}
 
+	@Override
+	public Date getModifiedDate() {
+		return _modifiedDate;
+	}
+
+	public boolean hasSetModifiedDate() {
+		return _setModifiedDate;
+	}
+
+	@Override
+	public void setModifiedDate(Date modifiedDate) {
+		_setModifiedDate = true;
+
+		if (_columnOriginalValues == Collections.EMPTY_MAP) {
+			_setColumnOriginalValues();
+		}
+
+		_modifiedDate = modifiedDate;
+	}
+
+	@Override
+	public boolean getDeleted() {
+		return _deleted;
+	}
+
+	@Override
+	public boolean isDeleted() {
+		return _deleted;
+	}
+
+	@Override
+	public void setDeleted(boolean deleted) {
+		if (_columnOriginalValues == Collections.EMPTY_MAP) {
+			_setColumnOriginalValues();
+		}
+
+		_deleted = deleted;
+	}
+
+	/**
+	 * @deprecated As of Athanasius (7.3.x), replaced by {@link
+	 *             #getColumnOriginalValue(String)}
+	 */
+	@Deprecated
+	public boolean getOriginalDeleted() {
+		return GetterUtil.getBoolean(
+			this.<Boolean>getColumnOriginalValue("deleted"));
+	}
+
 	public long getColumnBitmask() {
 		if (_columnBitmask > 0) {
 			return _columnBitmask;
@@ -392,6 +461,8 @@ public class TaskAttachmentModelImpl
 		taskAttachmentImpl.setTaskId(getTaskId());
 		taskAttachmentImpl.setFileEntryId(getFileEntryId());
 		taskAttachmentImpl.setCreateDate(getCreateDate());
+		taskAttachmentImpl.setModifiedDate(getModifiedDate());
+		taskAttachmentImpl.setDeleted(isDeleted());
 
 		taskAttachmentImpl.resetOriginalValues();
 
@@ -410,6 +481,10 @@ public class TaskAttachmentModelImpl
 			this.<Long>getColumnOriginalValue("fileEntryId"));
 		taskAttachmentImpl.setCreateDate(
 			this.<Date>getColumnOriginalValue("createDate"));
+		taskAttachmentImpl.setModifiedDate(
+			this.<Date>getColumnOriginalValue("modifiedDate"));
+		taskAttachmentImpl.setDeleted(
+			this.<Boolean>getColumnOriginalValue("deleted"));
 
 		return taskAttachmentImpl;
 	}
@@ -478,6 +553,8 @@ public class TaskAttachmentModelImpl
 	public void resetOriginalValues() {
 		_columnOriginalValues = Collections.emptyMap();
 
+		_setModifiedDate = false;
+
 		_columnBitmask = 0;
 	}
 
@@ -500,6 +577,17 @@ public class TaskAttachmentModelImpl
 		else {
 			taskAttachmentCacheModel.createDate = Long.MIN_VALUE;
 		}
+
+		Date modifiedDate = getModifiedDate();
+
+		if (modifiedDate != null) {
+			taskAttachmentCacheModel.modifiedDate = modifiedDate.getTime();
+		}
+		else {
+			taskAttachmentCacheModel.modifiedDate = Long.MIN_VALUE;
+		}
+
+		taskAttachmentCacheModel.deleted = isDeleted();
 
 		return taskAttachmentCacheModel;
 	}
@@ -566,6 +654,9 @@ public class TaskAttachmentModelImpl
 	private long _taskId;
 	private long _fileEntryId;
 	private Date _createDate;
+	private Date _modifiedDate;
+	private boolean _setModifiedDate;
+	private boolean _deleted;
 
 	public <T> T getColumnValue(String columnName) {
 		Function<TaskAttachment, Object> function =
@@ -599,6 +690,8 @@ public class TaskAttachmentModelImpl
 		_columnOriginalValues.put("taskId", _taskId);
 		_columnOriginalValues.put("fileEntryId", _fileEntryId);
 		_columnOriginalValues.put("createDate", _createDate);
+		_columnOriginalValues.put("modifiedDate", _modifiedDate);
+		_columnOriginalValues.put("deleted", _deleted);
 	}
 
 	private transient Map<String, Object> _columnOriginalValues;
@@ -619,6 +712,10 @@ public class TaskAttachmentModelImpl
 		columnBitmasks.put("fileEntryId", 4L);
 
 		columnBitmasks.put("createDate", 8L);
+
+		columnBitmasks.put("modifiedDate", 16L);
+
+		columnBitmasks.put("deleted", 32L);
 
 		_columnBitmasks = Collections.unmodifiableMap(columnBitmasks);
 	}

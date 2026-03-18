@@ -26,9 +26,6 @@ public class TaskLocalServiceWrapper
 		_taskLocalService = taskLocalService;
 	}
 
-	/**
-	 * Adiciona uma nova tarefa garantindo a injeção correta de IDs e datas.
-	 */
 	@Override
 	public com.todo.list.model.Task addCustomTask(
 		long groupId, long companyId, long userId, String userName,
@@ -292,9 +289,6 @@ public class TaskLocalServiceWrapper
 		return _taskLocalService.getTasks(start, end);
 	}
 
-	/**
-	 * Busca as tarefas de um usuário filtrando pelo status de conclusão
-	 */
 	@Override
 	public java.util.List<com.todo.list.model.Task> getTasksByStatus(
 		long groupId, long userId, boolean completed) {
@@ -312,14 +306,19 @@ public class TaskLocalServiceWrapper
 		return _taskLocalService.getTasksCount();
 	}
 
-	/**
-	 * Alterna o status da tarefa entre Concluída (true) e Pendente (false)
-	 */
 	@Override
 	public com.todo.list.model.Task toggleTaskStatus(long taskId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _taskLocalService.toggleTaskStatus(taskId);
+	}
+
+	@Override
+	public com.todo.list.model.Task updateCustomTask(
+			long taskId, String title, String description)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _taskLocalService.updateCustomTask(taskId, title, description);
 	}
 
 	/**

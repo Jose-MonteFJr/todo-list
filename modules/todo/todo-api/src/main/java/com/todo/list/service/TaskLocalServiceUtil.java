@@ -36,10 +36,6 @@ public class TaskLocalServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to <code>com.todo.list.service.impl.TaskLocalServiceImpl</code> and rerun ServiceBuilder to regenerate this class.
 	 */
-
-	/**
-	 * Adiciona uma nova tarefa garantindo a injeção correta de IDs e datas.
-	 */
 	public static Task addCustomTask(
 		long groupId, long companyId, long userId, String userName,
 		String title, String description) {
@@ -267,9 +263,6 @@ public class TaskLocalServiceUtil {
 		return getService().getTasks(start, end);
 	}
 
-	/**
-	 * Busca as tarefas de um usuário filtrando pelo status de conclusão
-	 */
 	public static List<Task> getTasksByStatus(
 		long groupId, long userId, boolean completed) {
 
@@ -285,11 +278,15 @@ public class TaskLocalServiceUtil {
 		return getService().getTasksCount();
 	}
 
-	/**
-	 * Alterna o status da tarefa entre Concluída (true) e Pendente (false)
-	 */
 	public static Task toggleTaskStatus(long taskId) throws PortalException {
 		return getService().toggleTaskStatus(taskId);
+	}
+
+	public static Task updateCustomTask(
+			long taskId, String title, String description)
+		throws PortalException {
+
+		return getService().updateCustomTask(taskId, title, description);
 	}
 
 	/**

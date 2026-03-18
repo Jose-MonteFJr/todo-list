@@ -120,6 +120,10 @@ public class TaskAttachmentPersistenceTest {
 
 		newTaskAttachment.setCreateDate(RandomTestUtil.nextDate());
 
+		newTaskAttachment.setModifiedDate(RandomTestUtil.nextDate());
+
+		newTaskAttachment.setDeleted(RandomTestUtil.randomBoolean());
+
 		_taskAttachments.add(_persistence.update(newTaskAttachment));
 
 		TaskAttachment existingTaskAttachment = _persistence.findByPrimaryKey(
@@ -136,6 +140,11 @@ public class TaskAttachmentPersistenceTest {
 		Assert.assertEquals(
 			Time.getShortTimestamp(existingTaskAttachment.getCreateDate()),
 			Time.getShortTimestamp(newTaskAttachment.getCreateDate()));
+		Assert.assertEquals(
+			Time.getShortTimestamp(existingTaskAttachment.getModifiedDate()),
+			Time.getShortTimestamp(newTaskAttachment.getModifiedDate()));
+		Assert.assertEquals(
+			existingTaskAttachment.isDeleted(), newTaskAttachment.isDeleted());
 	}
 
 	@Test
@@ -143,6 +152,14 @@ public class TaskAttachmentPersistenceTest {
 		_persistence.countByTaskId(RandomTestUtil.nextLong());
 
 		_persistence.countByTaskId(0L);
+	}
+
+	@Test
+	public void testCountByT_D() throws Exception {
+		_persistence.countByT_D(
+			RandomTestUtil.nextLong(), RandomTestUtil.randomBoolean());
+
+		_persistence.countByT_D(0L, RandomTestUtil.randomBoolean());
 	}
 
 	@Test
@@ -171,7 +188,8 @@ public class TaskAttachmentPersistenceTest {
 	protected OrderByComparator<TaskAttachment> getOrderByComparator() {
 		return OrderByComparatorFactoryUtil.create(
 			"Todo_TaskAttachment", "taskAttachmentId", true, "taskId", true,
-			"fileEntryId", true, "createDate", true);
+			"fileEntryId", true, "createDate", true, "modifiedDate", true,
+			"deleted", true);
 	}
 
 	@Test
@@ -398,6 +416,10 @@ public class TaskAttachmentPersistenceTest {
 		taskAttachment.setFileEntryId(RandomTestUtil.nextLong());
 
 		taskAttachment.setCreateDate(RandomTestUtil.nextDate());
+
+		taskAttachment.setModifiedDate(RandomTestUtil.nextDate());
+
+		taskAttachment.setDeleted(RandomTestUtil.randomBoolean());
 
 		_taskAttachments.add(_persistence.update(taskAttachment));
 

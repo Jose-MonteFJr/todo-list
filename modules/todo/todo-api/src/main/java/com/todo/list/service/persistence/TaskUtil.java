@@ -491,6 +491,423 @@ public class TaskUtil {
 	}
 
 	/**
+	 * Returns all the tasks where groupId = &#63; and userId = &#63; and deleted = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param userId the user ID
+	 * @param deleted the deleted
+	 * @return the matching tasks
+	 */
+	public static List<Task> findByG_U_D(
+		long groupId, long userId, boolean deleted) {
+
+		return getPersistence().findByG_U_D(groupId, userId, deleted);
+	}
+
+	/**
+	 * Returns a range of all the tasks where groupId = &#63; and userId = &#63; and deleted = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>TaskModelImpl</code>.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param userId the user ID
+	 * @param deleted the deleted
+	 * @param start the lower bound of the range of tasks
+	 * @param end the upper bound of the range of tasks (not inclusive)
+	 * @return the range of matching tasks
+	 */
+	public static List<Task> findByG_U_D(
+		long groupId, long userId, boolean deleted, int start, int end) {
+
+		return getPersistence().findByG_U_D(
+			groupId, userId, deleted, start, end);
+	}
+
+	/**
+	 * Returns an ordered range of all the tasks where groupId = &#63; and userId = &#63; and deleted = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>TaskModelImpl</code>.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param userId the user ID
+	 * @param deleted the deleted
+	 * @param start the lower bound of the range of tasks
+	 * @param end the upper bound of the range of tasks (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching tasks
+	 */
+	public static List<Task> findByG_U_D(
+		long groupId, long userId, boolean deleted, int start, int end,
+		OrderByComparator<Task> orderByComparator) {
+
+		return getPersistence().findByG_U_D(
+			groupId, userId, deleted, start, end, orderByComparator);
+	}
+
+	/**
+	 * Returns an ordered range of all the tasks where groupId = &#63; and userId = &#63; and deleted = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>TaskModelImpl</code>.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param userId the user ID
+	 * @param deleted the deleted
+	 * @param start the lower bound of the range of tasks
+	 * @param end the upper bound of the range of tasks (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the ordered range of matching tasks
+	 */
+	public static List<Task> findByG_U_D(
+		long groupId, long userId, boolean deleted, int start, int end,
+		OrderByComparator<Task> orderByComparator, boolean useFinderCache) {
+
+		return getPersistence().findByG_U_D(
+			groupId, userId, deleted, start, end, orderByComparator,
+			useFinderCache);
+	}
+
+	/**
+	 * Returns the first task in the ordered set where groupId = &#63; and userId = &#63; and deleted = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param userId the user ID
+	 * @param deleted the deleted
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching task
+	 * @throws NoSuchTaskException if a matching task could not be found
+	 */
+	public static Task findByG_U_D_First(
+			long groupId, long userId, boolean deleted,
+			OrderByComparator<Task> orderByComparator)
+		throws com.todo.list.exception.NoSuchTaskException {
+
+		return getPersistence().findByG_U_D_First(
+			groupId, userId, deleted, orderByComparator);
+	}
+
+	/**
+	 * Returns the first task in the ordered set where groupId = &#63; and userId = &#63; and deleted = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param userId the user ID
+	 * @param deleted the deleted
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching task, or <code>null</code> if a matching task could not be found
+	 */
+	public static Task fetchByG_U_D_First(
+		long groupId, long userId, boolean deleted,
+		OrderByComparator<Task> orderByComparator) {
+
+		return getPersistence().fetchByG_U_D_First(
+			groupId, userId, deleted, orderByComparator);
+	}
+
+	/**
+	 * Returns the last task in the ordered set where groupId = &#63; and userId = &#63; and deleted = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param userId the user ID
+	 * @param deleted the deleted
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching task
+	 * @throws NoSuchTaskException if a matching task could not be found
+	 */
+	public static Task findByG_U_D_Last(
+			long groupId, long userId, boolean deleted,
+			OrderByComparator<Task> orderByComparator)
+		throws com.todo.list.exception.NoSuchTaskException {
+
+		return getPersistence().findByG_U_D_Last(
+			groupId, userId, deleted, orderByComparator);
+	}
+
+	/**
+	 * Returns the last task in the ordered set where groupId = &#63; and userId = &#63; and deleted = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param userId the user ID
+	 * @param deleted the deleted
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching task, or <code>null</code> if a matching task could not be found
+	 */
+	public static Task fetchByG_U_D_Last(
+		long groupId, long userId, boolean deleted,
+		OrderByComparator<Task> orderByComparator) {
+
+		return getPersistence().fetchByG_U_D_Last(
+			groupId, userId, deleted, orderByComparator);
+	}
+
+	/**
+	 * Returns the tasks before and after the current task in the ordered set where groupId = &#63; and userId = &#63; and deleted = &#63;.
+	 *
+	 * @param taskId the primary key of the current task
+	 * @param groupId the group ID
+	 * @param userId the user ID
+	 * @param deleted the deleted
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next task
+	 * @throws NoSuchTaskException if a task with the primary key could not be found
+	 */
+	public static Task[] findByG_U_D_PrevAndNext(
+			long taskId, long groupId, long userId, boolean deleted,
+			OrderByComparator<Task> orderByComparator)
+		throws com.todo.list.exception.NoSuchTaskException {
+
+		return getPersistence().findByG_U_D_PrevAndNext(
+			taskId, groupId, userId, deleted, orderByComparator);
+	}
+
+	/**
+	 * Removes all the tasks where groupId = &#63; and userId = &#63; and deleted = &#63; from the database.
+	 *
+	 * @param groupId the group ID
+	 * @param userId the user ID
+	 * @param deleted the deleted
+	 */
+	public static void removeByG_U_D(
+		long groupId, long userId, boolean deleted) {
+
+		getPersistence().removeByG_U_D(groupId, userId, deleted);
+	}
+
+	/**
+	 * Returns the number of tasks where groupId = &#63; and userId = &#63; and deleted = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param userId the user ID
+	 * @param deleted the deleted
+	 * @return the number of matching tasks
+	 */
+	public static int countByG_U_D(long groupId, long userId, boolean deleted) {
+		return getPersistence().countByG_U_D(groupId, userId, deleted);
+	}
+
+	/**
+	 * Returns all the tasks where groupId = &#63; and userId = &#63; and completed = &#63; and deleted = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param userId the user ID
+	 * @param completed the completed
+	 * @param deleted the deleted
+	 * @return the matching tasks
+	 */
+	public static List<Task> findByG_U_C_D(
+		long groupId, long userId, boolean completed, boolean deleted) {
+
+		return getPersistence().findByG_U_C_D(
+			groupId, userId, completed, deleted);
+	}
+
+	/**
+	 * Returns a range of all the tasks where groupId = &#63; and userId = &#63; and completed = &#63; and deleted = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>TaskModelImpl</code>.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param userId the user ID
+	 * @param completed the completed
+	 * @param deleted the deleted
+	 * @param start the lower bound of the range of tasks
+	 * @param end the upper bound of the range of tasks (not inclusive)
+	 * @return the range of matching tasks
+	 */
+	public static List<Task> findByG_U_C_D(
+		long groupId, long userId, boolean completed, boolean deleted,
+		int start, int end) {
+
+		return getPersistence().findByG_U_C_D(
+			groupId, userId, completed, deleted, start, end);
+	}
+
+	/**
+	 * Returns an ordered range of all the tasks where groupId = &#63; and userId = &#63; and completed = &#63; and deleted = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>TaskModelImpl</code>.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param userId the user ID
+	 * @param completed the completed
+	 * @param deleted the deleted
+	 * @param start the lower bound of the range of tasks
+	 * @param end the upper bound of the range of tasks (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching tasks
+	 */
+	public static List<Task> findByG_U_C_D(
+		long groupId, long userId, boolean completed, boolean deleted,
+		int start, int end, OrderByComparator<Task> orderByComparator) {
+
+		return getPersistence().findByG_U_C_D(
+			groupId, userId, completed, deleted, start, end, orderByComparator);
+	}
+
+	/**
+	 * Returns an ordered range of all the tasks where groupId = &#63; and userId = &#63; and completed = &#63; and deleted = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>TaskModelImpl</code>.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param userId the user ID
+	 * @param completed the completed
+	 * @param deleted the deleted
+	 * @param start the lower bound of the range of tasks
+	 * @param end the upper bound of the range of tasks (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the ordered range of matching tasks
+	 */
+	public static List<Task> findByG_U_C_D(
+		long groupId, long userId, boolean completed, boolean deleted,
+		int start, int end, OrderByComparator<Task> orderByComparator,
+		boolean useFinderCache) {
+
+		return getPersistence().findByG_U_C_D(
+			groupId, userId, completed, deleted, start, end, orderByComparator,
+			useFinderCache);
+	}
+
+	/**
+	 * Returns the first task in the ordered set where groupId = &#63; and userId = &#63; and completed = &#63; and deleted = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param userId the user ID
+	 * @param completed the completed
+	 * @param deleted the deleted
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching task
+	 * @throws NoSuchTaskException if a matching task could not be found
+	 */
+	public static Task findByG_U_C_D_First(
+			long groupId, long userId, boolean completed, boolean deleted,
+			OrderByComparator<Task> orderByComparator)
+		throws com.todo.list.exception.NoSuchTaskException {
+
+		return getPersistence().findByG_U_C_D_First(
+			groupId, userId, completed, deleted, orderByComparator);
+	}
+
+	/**
+	 * Returns the first task in the ordered set where groupId = &#63; and userId = &#63; and completed = &#63; and deleted = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param userId the user ID
+	 * @param completed the completed
+	 * @param deleted the deleted
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching task, or <code>null</code> if a matching task could not be found
+	 */
+	public static Task fetchByG_U_C_D_First(
+		long groupId, long userId, boolean completed, boolean deleted,
+		OrderByComparator<Task> orderByComparator) {
+
+		return getPersistence().fetchByG_U_C_D_First(
+			groupId, userId, completed, deleted, orderByComparator);
+	}
+
+	/**
+	 * Returns the last task in the ordered set where groupId = &#63; and userId = &#63; and completed = &#63; and deleted = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param userId the user ID
+	 * @param completed the completed
+	 * @param deleted the deleted
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching task
+	 * @throws NoSuchTaskException if a matching task could not be found
+	 */
+	public static Task findByG_U_C_D_Last(
+			long groupId, long userId, boolean completed, boolean deleted,
+			OrderByComparator<Task> orderByComparator)
+		throws com.todo.list.exception.NoSuchTaskException {
+
+		return getPersistence().findByG_U_C_D_Last(
+			groupId, userId, completed, deleted, orderByComparator);
+	}
+
+	/**
+	 * Returns the last task in the ordered set where groupId = &#63; and userId = &#63; and completed = &#63; and deleted = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param userId the user ID
+	 * @param completed the completed
+	 * @param deleted the deleted
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching task, or <code>null</code> if a matching task could not be found
+	 */
+	public static Task fetchByG_U_C_D_Last(
+		long groupId, long userId, boolean completed, boolean deleted,
+		OrderByComparator<Task> orderByComparator) {
+
+		return getPersistence().fetchByG_U_C_D_Last(
+			groupId, userId, completed, deleted, orderByComparator);
+	}
+
+	/**
+	 * Returns the tasks before and after the current task in the ordered set where groupId = &#63; and userId = &#63; and completed = &#63; and deleted = &#63;.
+	 *
+	 * @param taskId the primary key of the current task
+	 * @param groupId the group ID
+	 * @param userId the user ID
+	 * @param completed the completed
+	 * @param deleted the deleted
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next task
+	 * @throws NoSuchTaskException if a task with the primary key could not be found
+	 */
+	public static Task[] findByG_U_C_D_PrevAndNext(
+			long taskId, long groupId, long userId, boolean completed,
+			boolean deleted, OrderByComparator<Task> orderByComparator)
+		throws com.todo.list.exception.NoSuchTaskException {
+
+		return getPersistence().findByG_U_C_D_PrevAndNext(
+			taskId, groupId, userId, completed, deleted, orderByComparator);
+	}
+
+	/**
+	 * Removes all the tasks where groupId = &#63; and userId = &#63; and completed = &#63; and deleted = &#63; from the database.
+	 *
+	 * @param groupId the group ID
+	 * @param userId the user ID
+	 * @param completed the completed
+	 * @param deleted the deleted
+	 */
+	public static void removeByG_U_C_D(
+		long groupId, long userId, boolean completed, boolean deleted) {
+
+		getPersistence().removeByG_U_C_D(groupId, userId, completed, deleted);
+	}
+
+	/**
+	 * Returns the number of tasks where groupId = &#63; and userId = &#63; and completed = &#63; and deleted = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param userId the user ID
+	 * @param completed the completed
+	 * @param deleted the deleted
+	 * @return the number of matching tasks
+	 */
+	public static int countByG_U_C_D(
+		long groupId, long userId, boolean completed, boolean deleted) {
+
+		return getPersistence().countByG_U_C_D(
+			groupId, userId, completed, deleted);
+	}
+
+	/**
 	 * Caches the task in the entity cache if it is enabled.
 	 *
 	 * @param task the task

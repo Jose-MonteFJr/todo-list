@@ -37,6 +37,8 @@ public class TaskAttachmentWrapper
 		attributes.put("taskId", getTaskId());
 		attributes.put("fileEntryId", getFileEntryId());
 		attributes.put("createDate", getCreateDate());
+		attributes.put("modifiedDate", getModifiedDate());
+		attributes.put("deleted", isDeleted());
 
 		return attributes;
 	}
@@ -66,6 +68,18 @@ public class TaskAttachmentWrapper
 		if (createDate != null) {
 			setCreateDate(createDate);
 		}
+
+		Date modifiedDate = (Date)attributes.get("modifiedDate");
+
+		if (modifiedDate != null) {
+			setModifiedDate(modifiedDate);
+		}
+
+		Boolean deleted = (Boolean)attributes.get("deleted");
+
+		if (deleted != null) {
+			setDeleted(deleted);
+		}
 	}
 
 	@Override
@@ -84,6 +98,16 @@ public class TaskAttachmentWrapper
 	}
 
 	/**
+	 * Returns the deleted of this task attachment.
+	 *
+	 * @return the deleted of this task attachment
+	 */
+	@Override
+	public boolean getDeleted() {
+		return model.getDeleted();
+	}
+
+	/**
 	 * Returns the file entry ID of this task attachment.
 	 *
 	 * @return the file entry ID of this task attachment
@@ -91,6 +115,16 @@ public class TaskAttachmentWrapper
 	@Override
 	public long getFileEntryId() {
 		return model.getFileEntryId();
+	}
+
+	/**
+	 * Returns the modified date of this task attachment.
+	 *
+	 * @return the modified date of this task attachment
+	 */
+	@Override
+	public Date getModifiedDate() {
+		return model.getModifiedDate();
 	}
 
 	/**
@@ -123,6 +157,16 @@ public class TaskAttachmentWrapper
 		return model.getTaskId();
 	}
 
+	/**
+	 * Returns <code>true</code> if this task attachment is deleted.
+	 *
+	 * @return <code>true</code> if this task attachment is deleted; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isDeleted() {
+		return model.isDeleted();
+	}
+
 	@Override
 	public void persist() {
 		model.persist();
@@ -139,6 +183,16 @@ public class TaskAttachmentWrapper
 	}
 
 	/**
+	 * Sets whether this task attachment is deleted.
+	 *
+	 * @param deleted the deleted of this task attachment
+	 */
+	@Override
+	public void setDeleted(boolean deleted) {
+		model.setDeleted(deleted);
+	}
+
+	/**
 	 * Sets the file entry ID of this task attachment.
 	 *
 	 * @param fileEntryId the file entry ID of this task attachment
@@ -146,6 +200,16 @@ public class TaskAttachmentWrapper
 	@Override
 	public void setFileEntryId(long fileEntryId) {
 		model.setFileEntryId(fileEntryId);
+	}
+
+	/**
+	 * Sets the modified date of this task attachment.
+	 *
+	 * @param modifiedDate the modified date of this task attachment
+	 */
+	@Override
+	public void setModifiedDate(Date modifiedDate) {
+		model.setModifiedDate(modifiedDate);
 	}
 
 	/**

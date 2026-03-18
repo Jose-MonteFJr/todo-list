@@ -160,6 +160,14 @@ public class SubTaskPersistenceTest {
 	}
 
 	@Test
+	public void testCountByT_D() throws Exception {
+		_persistence.countByT_D(
+			RandomTestUtil.nextLong(), RandomTestUtil.randomBoolean());
+
+		_persistence.countByT_D(0L, RandomTestUtil.randomBoolean());
+	}
+
+	@Test
 	public void testFindByPrimaryKeyExisting() throws Exception {
 		SubTask newSubTask = addSubTask();
 

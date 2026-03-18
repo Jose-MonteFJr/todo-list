@@ -29,5 +29,7 @@
 		<field name="taskId" type="long" />
 		<field name="fileEntryId" type="long" />
 		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="deleted" type="boolean" />
 	</model>
 </model-hints>

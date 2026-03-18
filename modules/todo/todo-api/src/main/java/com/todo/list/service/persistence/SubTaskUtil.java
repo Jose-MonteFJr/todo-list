@@ -274,6 +274,189 @@ public class SubTaskUtil {
 	}
 
 	/**
+	 * Returns all the sub tasks where taskId = &#63; and deleted = &#63;.
+	 *
+	 * @param taskId the task ID
+	 * @param deleted the deleted
+	 * @return the matching sub tasks
+	 */
+	public static List<SubTask> findByT_D(long taskId, boolean deleted) {
+		return getPersistence().findByT_D(taskId, deleted);
+	}
+
+	/**
+	 * Returns a range of all the sub tasks where taskId = &#63; and deleted = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>SubTaskModelImpl</code>.
+	 * </p>
+	 *
+	 * @param taskId the task ID
+	 * @param deleted the deleted
+	 * @param start the lower bound of the range of sub tasks
+	 * @param end the upper bound of the range of sub tasks (not inclusive)
+	 * @return the range of matching sub tasks
+	 */
+	public static List<SubTask> findByT_D(
+		long taskId, boolean deleted, int start, int end) {
+
+		return getPersistence().findByT_D(taskId, deleted, start, end);
+	}
+
+	/**
+	 * Returns an ordered range of all the sub tasks where taskId = &#63; and deleted = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>SubTaskModelImpl</code>.
+	 * </p>
+	 *
+	 * @param taskId the task ID
+	 * @param deleted the deleted
+	 * @param start the lower bound of the range of sub tasks
+	 * @param end the upper bound of the range of sub tasks (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching sub tasks
+	 */
+	public static List<SubTask> findByT_D(
+		long taskId, boolean deleted, int start, int end,
+		OrderByComparator<SubTask> orderByComparator) {
+
+		return getPersistence().findByT_D(
+			taskId, deleted, start, end, orderByComparator);
+	}
+
+	/**
+	 * Returns an ordered range of all the sub tasks where taskId = &#63; and deleted = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>SubTaskModelImpl</code>.
+	 * </p>
+	 *
+	 * @param taskId the task ID
+	 * @param deleted the deleted
+	 * @param start the lower bound of the range of sub tasks
+	 * @param end the upper bound of the range of sub tasks (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the ordered range of matching sub tasks
+	 */
+	public static List<SubTask> findByT_D(
+		long taskId, boolean deleted, int start, int end,
+		OrderByComparator<SubTask> orderByComparator, boolean useFinderCache) {
+
+		return getPersistence().findByT_D(
+			taskId, deleted, start, end, orderByComparator, useFinderCache);
+	}
+
+	/**
+	 * Returns the first sub task in the ordered set where taskId = &#63; and deleted = &#63;.
+	 *
+	 * @param taskId the task ID
+	 * @param deleted the deleted
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching sub task
+	 * @throws NoSuchSubTaskException if a matching sub task could not be found
+	 */
+	public static SubTask findByT_D_First(
+			long taskId, boolean deleted,
+			OrderByComparator<SubTask> orderByComparator)
+		throws com.todo.list.exception.NoSuchSubTaskException {
+
+		return getPersistence().findByT_D_First(
+			taskId, deleted, orderByComparator);
+	}
+
+	/**
+	 * Returns the first sub task in the ordered set where taskId = &#63; and deleted = &#63;.
+	 *
+	 * @param taskId the task ID
+	 * @param deleted the deleted
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching sub task, or <code>null</code> if a matching sub task could not be found
+	 */
+	public static SubTask fetchByT_D_First(
+		long taskId, boolean deleted,
+		OrderByComparator<SubTask> orderByComparator) {
+
+		return getPersistence().fetchByT_D_First(
+			taskId, deleted, orderByComparator);
+	}
+
+	/**
+	 * Returns the last sub task in the ordered set where taskId = &#63; and deleted = &#63;.
+	 *
+	 * @param taskId the task ID
+	 * @param deleted the deleted
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching sub task
+	 * @throws NoSuchSubTaskException if a matching sub task could not be found
+	 */
+	public static SubTask findByT_D_Last(
+			long taskId, boolean deleted,
+			OrderByComparator<SubTask> orderByComparator)
+		throws com.todo.list.exception.NoSuchSubTaskException {
+
+		return getPersistence().findByT_D_Last(
+			taskId, deleted, orderByComparator);
+	}
+
+	/**
+	 * Returns the last sub task in the ordered set where taskId = &#63; and deleted = &#63;.
+	 *
+	 * @param taskId the task ID
+	 * @param deleted the deleted
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching sub task, or <code>null</code> if a matching sub task could not be found
+	 */
+	public static SubTask fetchByT_D_Last(
+		long taskId, boolean deleted,
+		OrderByComparator<SubTask> orderByComparator) {
+
+		return getPersistence().fetchByT_D_Last(
+			taskId, deleted, orderByComparator);
+	}
+
+	/**
+	 * Returns the sub tasks before and after the current sub task in the ordered set where taskId = &#63; and deleted = &#63;.
+	 *
+	 * @param subTaskId the primary key of the current sub task
+	 * @param taskId the task ID
+	 * @param deleted the deleted
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next sub task
+	 * @throws NoSuchSubTaskException if a sub task with the primary key could not be found
+	 */
+	public static SubTask[] findByT_D_PrevAndNext(
+			long subTaskId, long taskId, boolean deleted,
+			OrderByComparator<SubTask> orderByComparator)
+		throws com.todo.list.exception.NoSuchSubTaskException {
+
+		return getPersistence().findByT_D_PrevAndNext(
+			subTaskId, taskId, deleted, orderByComparator);
+	}
+
+	/**
+	 * Removes all the sub tasks where taskId = &#63; and deleted = &#63; from the database.
+	 *
+	 * @param taskId the task ID
+	 * @param deleted the deleted
+	 */
+	public static void removeByT_D(long taskId, boolean deleted) {
+		getPersistence().removeByT_D(taskId, deleted);
+	}
+
+	/**
+	 * Returns the number of sub tasks where taskId = &#63; and deleted = &#63;.
+	 *
+	 * @param taskId the task ID
+	 * @param deleted the deleted
+	 * @return the number of matching sub tasks
+	 */
+	public static int countByT_D(long taskId, boolean deleted) {
+		return getPersistence().countByT_D(taskId, deleted);
+	}
+
+	/**
 	 * Caches the sub task in the entity cache if it is enabled.
 	 *
 	 * @param subTask the sub task

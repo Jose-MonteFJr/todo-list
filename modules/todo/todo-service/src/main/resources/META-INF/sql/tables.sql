@@ -27,5 +27,7 @@ create table Todo_TaskAttachment (
 	taskAttachmentId LONG not null primary key,
 	taskId LONG,
 	fileEntryId LONG,
-	createDate DATE null
+	createDate DATE null,
+	modifiedDate DATE null,
+	deleted BOOLEAN
 );

@@ -54,7 +54,7 @@ public class TaskAttachmentCacheModel
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(9);
+		StringBundler sb = new StringBundler(13);
 
 		sb.append("{taskAttachmentId=");
 		sb.append(taskAttachmentId);
@@ -64,6 +64,10 @@ public class TaskAttachmentCacheModel
 		sb.append(fileEntryId);
 		sb.append(", createDate=");
 		sb.append(createDate);
+		sb.append(", modifiedDate=");
+		sb.append(modifiedDate);
+		sb.append(", deleted=");
+		sb.append(deleted);
 		sb.append("}");
 
 		return sb.toString();
@@ -84,6 +88,15 @@ public class TaskAttachmentCacheModel
 			taskAttachmentImpl.setCreateDate(new Date(createDate));
 		}
 
+		if (modifiedDate == Long.MIN_VALUE) {
+			taskAttachmentImpl.setModifiedDate(null);
+		}
+		else {
+			taskAttachmentImpl.setModifiedDate(new Date(modifiedDate));
+		}
+
+		taskAttachmentImpl.setDeleted(deleted);
+
 		taskAttachmentImpl.resetOriginalValues();
 
 		return taskAttachmentImpl;
@@ -97,6 +110,9 @@ public class TaskAttachmentCacheModel
 
 		fileEntryId = objectInput.readLong();
 		createDate = objectInput.readLong();
+		modifiedDate = objectInput.readLong();
+
+		deleted = objectInput.readBoolean();
 	}
 
 	@Override
@@ -107,11 +123,16 @@ public class TaskAttachmentCacheModel
 
 		objectOutput.writeLong(fileEntryId);
 		objectOutput.writeLong(createDate);
+		objectOutput.writeLong(modifiedDate);
+
+		objectOutput.writeBoolean(deleted);
 	}
 
 	public long taskAttachmentId;
 	public long taskId;
 	public long fileEntryId;
 	public long createDate;
+	public long modifiedDate;
+	public boolean deleted;
 
 }
