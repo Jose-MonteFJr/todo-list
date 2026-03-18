@@ -21,7 +21,7 @@ import com.todo.list.exception.TaskTitleException;
 public class TaskLocalServiceImpl extends TaskLocalServiceBaseImpl {
     // Adiciona uma nova tarefa garantindo a injeção correta de IDs e datas.
 
-    public Task addCustomTask(long groupId, long companyId, long userId, String userName, String title, String description) throws PortalException {
+    public Task addTask(long groupId, long companyId, long userId, String userName, String title, String description) throws PortalException {
         validate(title);
 
         long taskId = counterLocalService.increment(Task.class.getName());
@@ -54,7 +54,7 @@ public class TaskLocalServiceImpl extends TaskLocalServiceBaseImpl {
     }
 
     // Edita as tarefas criadas
-    public Task updateCustomTask(long taskId, String title, String description) throws PortalException {
+    public Task updateTask(long taskId, String title, String description) throws PortalException {
         validate(title);
 
         Task task = super.getTask(taskId);

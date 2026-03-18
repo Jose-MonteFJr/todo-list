@@ -16,6 +16,10 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.Portlet;
 
+import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.todo.list.exception.TaskTitleException;
+import com.todo.list.exception.SubTaskTitleException;
+
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
@@ -57,15 +61,19 @@ public class TodoListPortlet extends MVCPortlet {
 		String title = ParamUtil.getString(actionRequest, "title");
 		String description = ParamUtil.getString(actionRequest, "description");
 
-		// Envia os dados limpos para a camada de serviço
-		_taskLocalService.addCustomTask(
-				themeDisplay.getScopeGroupId(),
-				themeDisplay.getCompanyId(),
-				themeDisplay.getUserId(),
-				themeDisplay.getUser().getFullName(),
-				title,
-				description
-		);
+		try {
+			_taskLocalService.addTask(
+					themeDisplay.getScopeGroupId(),
+					themeDisplay.getCompanyId(),
+					themeDisplay.getUserId(),
+					themeDisplay.getUser().getFullName(),
+					title,
+					description
+			);
+		} catch (TaskTitleException e) {
+			SessionErrors.add(actionRequest, e.getClass().getName());
+			actionResponse.getRenderParameters().setValue("mvcPath", "/view.jsp");
+		}
 	}
 
 	 // AÇÃO: Excluir uma tarefa
@@ -82,7 +90,12 @@ public class TodoListPortlet extends MVCPortlet {
 		String title = ParamUtil.getString(actionRequest, "title");
 		String description = ParamUtil.getString(actionRequest, "description");
 
-		_taskLocalService.updateCustomTask(taskId, title, description);
+		try {
+			_taskLocalService.updateTask(taskId, title, description);
+		} catch (TaskTitleException e) {
+			SessionErrors.add(actionRequest, e.getClass().getName());
+			actionResponse.getRenderParameters().setValue("mvcPath", "/view.jsp");
+		}
 	}
 
 	 // AÇÃO: Alternar entre Concluída e Pendente
@@ -100,9 +113,14 @@ public class TodoListPortlet extends MVCPortlet {
 	public void addSubTask(ActionRequest actionRequest, ActionResponse actionResponse) throws PortalException {
 		long taskId = ParamUtil.getLong(actionRequest, "taskId");
 		String title = ParamUtil.getString(actionRequest, "title");
+		int position = ParamUtil.getInteger(actionRequest, "position");
 
-		// Vamos passar a posição como 0 por padrão para simplificar os testes iniciais
-		_subTaskLocalService.addSubTask(taskId, title, 0);
+		try {
+			_subTaskLocalService.addSubTask(taskId, title, position);
+		} catch (SubTaskTitleException e) {
+			SessionErrors.add(actionRequest, e.getClass().getName());
+			actionResponse.getRenderParameters().setValue("mvcPath", "/view.jsp");
+		}
 	}
 
 	// AÇÃO: Excluir uma SubTask (Soft Delete)
@@ -122,6 +140,11 @@ public class TodoListPortlet extends MVCPortlet {
 		long subTaskId = ParamUtil.getLong(actionRequest, "subTaskId");
 		String title = ParamUtil.getString(actionRequest, "title");
 
-		_subTaskLocalService.updateSubTask(subTaskId, title);
+		try {
+			_subTaskLocalService.updateSubTask(subTaskId, title);
+		} catch (SubTaskTitleException e) {
+			SessionErrors.add(actionRequest, e.getClass().getName());
+			actionResponse.getRenderParameters().setValue("mvcPath", "/view.jsp");
+		}
 	}
 }

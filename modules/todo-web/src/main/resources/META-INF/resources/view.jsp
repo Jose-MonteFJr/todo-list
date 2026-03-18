@@ -6,6 +6,10 @@
 %>
 
 <div class="container-fluid container-fluid-max-xl mt-4">
+
+	<liferay-ui:error key="com.todo.list.exception.TaskTitleException" message="Erro: O título da tarefa não pode ficar vazio!" />
+	<liferay-ui:error key="com.todo.list.exception.SubTaskTitleException" message="Erro: O título da checklist não pode ficar vazio!" />
+
 	<h2>Gerenciador de Tarefas</h2>
 
 	<portlet:actionURL name="addTask" var="addTaskURL" />

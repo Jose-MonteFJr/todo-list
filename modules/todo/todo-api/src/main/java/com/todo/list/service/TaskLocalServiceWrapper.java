@@ -27,12 +27,12 @@ public class TaskLocalServiceWrapper
 	}
 
 	@Override
-	public com.todo.list.model.Task addCustomTask(
+	public com.todo.list.model.Task addTask(
 			long groupId, long companyId, long userId, String userName,
 			String title, String description)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
-		return _taskLocalService.addCustomTask(
+		return _taskLocalService.addTask(
 			groupId, companyId, userId, userName, title, description);
 	}
 
@@ -315,11 +315,11 @@ public class TaskLocalServiceWrapper
 	}
 
 	@Override
-	public com.todo.list.model.Task updateCustomTask(
+	public com.todo.list.model.Task updateTask(
 			long taskId, String title, String description)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
-		return _taskLocalService.updateCustomTask(taskId, title, description);
+		return _taskLocalService.updateTask(taskId, title, description);
 	}
 
 	/**

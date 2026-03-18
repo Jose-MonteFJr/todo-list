@@ -55,7 +55,7 @@ public interface TaskLocalService
 	 *
 	 * Never modify this interface directly. Add custom service methods to <code>com.todo.list.service.impl.TaskLocalServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface. Consume the task local service via injection or a <code>org.osgi.util.tracker.ServiceTracker</code>. Use {@link TaskLocalServiceUtil} if injection and service tracking are not available.
 	 */
-	public Task addCustomTask(
+	public Task addTask(
 			long groupId, long companyId, long userId, String userName,
 			String title, String description)
 		throws PortalException;
@@ -256,7 +256,7 @@ public interface TaskLocalService
 
 	public Task toggleTaskStatus(long taskId) throws PortalException;
 
-	public Task updateCustomTask(long taskId, String title, String description)
+	public Task updateTask(long taskId, String title, String description)
 		throws PortalException;
 
 	/**
