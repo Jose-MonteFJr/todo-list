@@ -9,6 +9,9 @@ import com.liferay.portal.kernel.util.WebKeys;
 import com.todo.list.model.Task;
 import com.todo.list.service.TaskLocalService;
 
+import com.todo.list.model.SubTask;
+import com.todo.list.service.SubTaskLocalService;
+
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.Portlet;
@@ -33,24 +36,28 @@ import org.osgi.service.component.annotations.Reference;
 )
 public class TodoListPortlet extends MVCPortlet {
 
-	// Injeta a comunicação com o banco de dados que geramos no Service Builder
+	// Injects
 	@Reference
 	private TaskLocalService _taskLocalService;
 
+	@Reference
+	private SubTaskLocalService _subTaskLocalService;
+
+	// ==========================================
+	// AÇÕES DA TASK (PRINCIPAL)
+	// ==========================================
 
 	// AÇÃO: Adicionar uma nova tarefa
 
 	public void addTask(ActionRequest actionRequest, ActionResponse actionResponse) throws PortalException {
 
-		// O ThemeDisplay é a ferramenta de segurança do Liferay. Ele garante
-		// que estamos pegando o ID real do usuário logado, evitando fraudes no form.
 		ThemeDisplay themeDisplay = (ThemeDisplay) actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
 
 		// ParamUtil protege contra SQL Injection e pega os dados do JSP
 		String title = ParamUtil.getString(actionRequest, "title");
 		String description = ParamUtil.getString(actionRequest, "description");
 
-		// Envia os dados limpos para a nossa camada de serviço (que vamos criar a seguir)
+		// Envia os dados limpos para a camada de serviço
 		_taskLocalService.addCustomTask(
 				themeDisplay.getScopeGroupId(),
 				themeDisplay.getCompanyId(),
@@ -83,5 +90,38 @@ public class TodoListPortlet extends MVCPortlet {
 	public void toggleTaskStatus(ActionRequest actionRequest, ActionResponse actionResponse) throws PortalException {
 		long taskId = ParamUtil.getLong(actionRequest, "taskId");
 		_taskLocalService.toggleTaskStatus(taskId);
+	}
+
+	// ==========================================
+	// AÇÕES DE SUBTASK (CHECKLIST)
+	// ==========================================
+
+	// AÇÃO: Adicionar uma nova SubTask
+	public void addSubTask(ActionRequest actionRequest, ActionResponse actionResponse) throws PortalException {
+		long taskId = ParamUtil.getLong(actionRequest, "taskId");
+		String title = ParamUtil.getString(actionRequest, "title");
+
+		// Vamos passar a posição como 0 por padrão para simplificar os testes iniciais
+		_subTaskLocalService.addSubTask(taskId, title, 0);
+	}
+
+	// AÇÃO: Excluir uma SubTask (Soft Delete)
+	public void deleteSubTask(ActionRequest actionRequest, ActionResponse actionResponse) throws PortalException {
+		long subTaskId = ParamUtil.getLong(actionRequest, "subTaskId");
+		_subTaskLocalService.deleteSubTask(subTaskId);
+	}
+
+	// AÇÃO: Alternar entre Concluída e Pendente (SubTask)
+	public void toggleSubTaskStatus(ActionRequest actionRequest, ActionResponse actionResponse) throws PortalException {
+		long subTaskId = ParamUtil.getLong(actionRequest, "subTaskId");
+		_subTaskLocalService.toggleSubTaskStatus(subTaskId);
+	}
+
+	// AÇÃO: Editar o título de uma SubTask
+	public void updateSubTask(ActionRequest actionRequest, ActionResponse actionResponse) throws PortalException {
+		long subTaskId = ParamUtil.getLong(actionRequest, "subTaskId");
+		String title = ParamUtil.getString(actionRequest, "title");
+
+		_subTaskLocalService.updateSubTask(subTaskId, title);
 	}
 }
