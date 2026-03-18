@@ -26,6 +26,13 @@ public class SubTaskLocalServiceWrapper
 		_subTaskLocalService = subTaskLocalService;
 	}
 
+	@Override
+	public com.todo.list.model.SubTask addSubTask(
+		long taskId, String title, int position) {
+
+		return _subTaskLocalService.addSubTask(taskId, title, position);
+	}
+
 	/**
 	 * Adds the sub task to the database. Also notifies the appropriate model listeners.
 	 *
@@ -225,6 +232,13 @@ public class SubTaskLocalServiceWrapper
 	}
 
 	@Override
+	public java.util.List<com.todo.list.model.SubTask> getActiveSubTasks(
+		long taskId) {
+
+		return _subTaskLocalService.getActiveSubTasks(taskId);
+	}
+
+	@Override
 	public com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery
 		getIndexableActionableDynamicQuery() {
 
@@ -292,6 +306,21 @@ public class SubTaskLocalServiceWrapper
 	@Override
 	public int getSubTasksCount() {
 		return _subTaskLocalService.getSubTasksCount();
+	}
+
+	@Override
+	public com.todo.list.model.SubTask toggleSubTaskStatus(long subTaskId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _subTaskLocalService.toggleSubTaskStatus(subTaskId);
+	}
+
+	@Override
+	public com.todo.list.model.SubTask updateSubTask(
+			long subTaskId, String title)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _subTaskLocalService.updateSubTask(subTaskId, title);
 	}
 
 	/**

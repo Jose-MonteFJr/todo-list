@@ -36,6 +36,9 @@ public class SubTaskLocalServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to <code>com.todo.list.service.impl.SubTaskLocalServiceImpl</code> and rerun ServiceBuilder to regenerate this class.
 	 */
+	public static SubTask addSubTask(long taskId, String title, int position) {
+		return getService().addSubTask(taskId, title, position);
+	}
 
 	/**
 	 * Adds the sub task to the database. Also notifies the appropriate model listeners.
@@ -205,6 +208,10 @@ public class SubTaskLocalServiceUtil {
 		return getService().getActionableDynamicQuery();
 	}
 
+	public static List<SubTask> getActiveSubTasks(long taskId) {
+		return getService().getActiveSubTasks(taskId);
+	}
+
 	public static
 		com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery
 			getIndexableActionableDynamicQuery() {
@@ -263,6 +270,18 @@ public class SubTaskLocalServiceUtil {
 	 */
 	public static int getSubTasksCount() {
 		return getService().getSubTasksCount();
+	}
+
+	public static SubTask toggleSubTaskStatus(long subTaskId)
+		throws PortalException {
+
+		return getService().toggleSubTaskStatus(subTaskId);
+	}
+
+	public static SubTask updateSubTask(long subTaskId, String title)
+		throws PortalException {
+
+		return getService().updateSubTask(subTaskId, title);
 	}
 
 	/**

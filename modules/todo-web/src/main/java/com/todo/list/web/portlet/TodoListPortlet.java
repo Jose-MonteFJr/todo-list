@@ -61,7 +61,6 @@ public class TodoListPortlet extends MVCPortlet {
 		);
 	}
 
-
 	 // AÇÃO: Excluir uma tarefa
 
 	public void deleteTask(ActionRequest actionRequest, ActionResponse actionResponse) throws PortalException {
@@ -69,6 +68,15 @@ public class TodoListPortlet extends MVCPortlet {
 		_taskLocalService.deleteTask(taskId);
 	}
 
+	// AÇÃO: Editar uma tarefa existente
+	public void updateTask(ActionRequest actionRequest, ActionResponse actionResponse) throws PortalException {
+		// Pega os parâmetros do formulário de edição
+		long taskId = ParamUtil.getLong(actionRequest, "taskId");
+		String title = ParamUtil.getString(actionRequest, "title");
+		String description = ParamUtil.getString(actionRequest, "description");
+
+		_taskLocalService.updateCustomTask(taskId, title, description);
+	}
 
 	 // AÇÃO: Alternar entre Concluída e Pendente
 
