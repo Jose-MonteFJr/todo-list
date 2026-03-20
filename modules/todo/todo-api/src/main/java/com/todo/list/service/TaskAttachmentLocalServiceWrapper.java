@@ -29,6 +29,14 @@ public class TaskAttachmentLocalServiceWrapper
 		_taskAttachmentLocalService = taskAttachmentLocalService;
 	}
 
+	@Override
+	public com.todo.list.model.TaskAttachment addTaskAttachment(
+		long taskId, long fileEntryId) {
+
+		return _taskAttachmentLocalService.addTaskAttachment(
+			taskId, fileEntryId);
+	}
+
 	/**
 	 * Adds the task attachment to the database. Also notifies the appropriate model listeners.
 	 *
@@ -238,6 +246,13 @@ public class TaskAttachmentLocalServiceWrapper
 	}
 
 	@Override
+	public java.util.List<com.todo.list.model.TaskAttachment>
+		getActiveAttachments(long taskId) {
+
+		return _taskAttachmentLocalService.getActiveAttachments(taskId);
+	}
+
+	@Override
 	public com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery
 		getIndexableActionableDynamicQuery() {
 
@@ -306,6 +321,15 @@ public class TaskAttachmentLocalServiceWrapper
 	@Override
 	public int getTaskAttachmentsCount() {
 		return _taskAttachmentLocalService.getTaskAttachmentsCount();
+	}
+
+	@Override
+	public com.todo.list.model.TaskAttachment updateTaskAttachment(
+			long taskAttachmentId, long newFileEntryId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _taskAttachmentLocalService.updateTaskAttachment(
+			taskAttachmentId, newFileEntryId);
 	}
 
 	/**

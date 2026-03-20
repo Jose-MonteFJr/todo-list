@@ -36,6 +36,11 @@ public class TaskAttachmentLocalServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to <code>com.todo.list.service.impl.TaskAttachmentLocalServiceImpl</code> and rerun ServiceBuilder to regenerate this class.
 	 */
+	public static TaskAttachment addTaskAttachment(
+		long taskId, long fileEntryId) {
+
+		return getService().addTaskAttachment(taskId, fileEntryId);
+	}
 
 	/**
 	 * Adds the task attachment to the database. Also notifies the appropriate model listeners.
@@ -211,6 +216,10 @@ public class TaskAttachmentLocalServiceUtil {
 		return getService().getActionableDynamicQuery();
 	}
 
+	public static List<TaskAttachment> getActiveAttachments(long taskId) {
+		return getService().getActiveAttachments(taskId);
+	}
+
 	public static
 		com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery
 			getIndexableActionableDynamicQuery() {
@@ -271,6 +280,14 @@ public class TaskAttachmentLocalServiceUtil {
 	 */
 	public static int getTaskAttachmentsCount() {
 		return getService().getTaskAttachmentsCount();
+	}
+
+	public static TaskAttachment updateTaskAttachment(
+			long taskAttachmentId, long newFileEntryId)
+		throws PortalException {
+
+		return getService().updateTaskAttachment(
+			taskAttachmentId, newFileEntryId);
 	}
 
 	/**

@@ -57,6 +57,7 @@ public interface TaskAttachmentLocalService
 	 *
 	 * Never modify this interface directly. Add custom service methods to <code>com.todo.list.service.impl.TaskAttachmentLocalServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface. Consume the task attachment local service via injection or a <code>org.osgi.util.tracker.ServiceTracker</code>. Use {@link TaskAttachmentLocalServiceUtil} if injection and service tracking are not available.
 	 */
+	public TaskAttachment addTaskAttachment(long taskId, long fileEntryId);
 
 	/**
 	 * Adds the task attachment to the database. Also notifies the appropriate model listeners.
@@ -200,6 +201,9 @@ public interface TaskAttachmentLocalService
 	public ActionableDynamicQuery getActionableDynamicQuery();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<TaskAttachment> getActiveAttachments(long taskId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();
 
 	/**
@@ -249,6 +253,10 @@ public interface TaskAttachmentLocalService
 	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getTaskAttachmentsCount();
+
+	public TaskAttachment updateTaskAttachment(
+			long taskAttachmentId, long newFileEntryId)
+		throws PortalException;
 
 	/**
 	 * Updates the task attachment in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
