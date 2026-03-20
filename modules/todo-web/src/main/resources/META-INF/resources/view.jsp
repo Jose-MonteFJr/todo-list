@@ -1,4 +1,5 @@
 <%@ include file="init.jsp" %>
+<%@ page import="com.liferay.portal.kernel.security.auth.AuthTokenUtil" %>
 
 <%
     List<Task> pendingTasks = TaskLocalServiceUtil.getTasksByStatus(themeDisplay.getScopeGroupId(), themeDisplay.getUserId(), false);
@@ -12,6 +13,7 @@
 
     <div class="card p-3 mb-4">
         <aui:form action="<%= addTaskURL %>" method="post">
+            <input type="hidden" name="p_auth" value="<%= AuthTokenUtil.getToken(request) %>"/>
             <aui:input name="title" label="Título da tarefa" required="true" cssClass="form-control"/>
             <aui:input name="description" label="Descrição" type="textarea" cssClass="form-control"/>
             <aui:button type="submit" value="Adicionar Tarefa" cssClass="btn btn-primary mt-2"/>
@@ -40,11 +42,13 @@
                         <div>
                             <portlet:actionURL name="toggleTaskStatus" var="completeTaskURL">
                                 <portlet:param name="taskId" value="<%= String.valueOf(task.getTaskId()) %>"/>
+                                <portlet:param name="p_auth" value="<%= AuthTokenUtil.getToken(request) %>"/>
                             </portlet:actionURL>
                             <a href="<%= completeTaskURL %>" class="btn btn-sm btn-success">Concluir Tarefa</a>
 
                             <portlet:actionURL name="deleteTask" var="deleteTaskURL">
                                 <portlet:param name="taskId" value="<%= String.valueOf(task.getTaskId()) %>"/>
+                                <portlet:param name="p_auth" value="<%= AuthTokenUtil.getToken(request) %>"/>
                             </portlet:actionURL>
                             <a href="<%= deleteTaskURL %>" class="btn btn-sm btn-danger">Excluir</a>
                         </div>
@@ -61,6 +65,7 @@
                                     <portlet:actionURL name="toggleSubTaskStatus" var="toggleSubURL">
                                         <portlet:param name="subTaskId"
                                                        value="<%= String.valueOf(sub.getSubTaskId()) %>"/>
+                                        <portlet:param name="p_auth" value="<%= AuthTokenUtil.getToken(request) %>"/>
                                     </portlet:actionURL>
 
                                     <a href="<%= toggleSubURL %>" class="mr-2">
@@ -68,12 +73,13 @@
                                     </a>
 
                                     <span style="<%= sub.getCompleted() ? "text-decoration: line-through; color: gray;" : "" %>">
-                            			<%= sub.getTitle() %>
-                        			</span>
+                                      <%= sub.getTitle() %>
+                                  </span>
 
                                     <portlet:actionURL name="deleteSubTask" var="delSubURL">
                                         <portlet:param name="subTaskId"
                                                        value="<%= String.valueOf(sub.getSubTaskId()) %>"/>
+                                        <portlet:param name="p_auth" value="<%= AuthTokenUtil.getToken(request) %>"/>
                                     </portlet:actionURL>
                                     <a href="<%= delSubURL %>" class="ml-2 text-danger" style="font-size: 0.8rem;">(excluir)</a>
                                 </div>
@@ -90,6 +96,8 @@
 
                                     <aui:form action="<%= updateSubTaskURL %>" method="post"
                                               cssClass="form-inline mt-1">
+                                        <input type="hidden" name="p_auth"
+                                               value="<%= AuthTokenUtil.getToken(request) %>"/>
                                         <aui:input name="title" label="" value="<%= sub.getTitle() %>"
                                                    cssClass="form-control form-control-sm" inlineField="<%= true %>"/>
                                         <aui:button type="submit" value="Salvar"
@@ -102,6 +110,7 @@
 
                         <portlet:actionURL name="addSubTask" var="addSubTaskURL"/>
                         <aui:form action="<%= addSubTaskURL %>" method="post" cssClass="form-inline mt-2">
+                            <input type="hidden" name="p_auth" value="<%= AuthTokenUtil.getToken(request) %>"/>
                             <aui:input name="taskId" type="hidden" value="<%= task.getTaskId() %>"/>
                             <aui:input name="title" label="" placeholder="Nova sub-tarefa..."
                                        cssClass="form-control form-control-sm" inlineField="<%= true %>"/>
@@ -119,6 +128,7 @@
                         <portlet:actionURL name="addTaskAttachment" var="addAttachmentURL"/>
                         <aui:form action="<%= addAttachmentURL %>" method="post" enctype="multipart/form-data"
                                   cssClass="d-flex align-items-center">
+                            <input type="hidden" name="p_auth" value="<%= AuthTokenUtil.getToken(request) %>"/>
                             <aui:input name="taskId" type="hidden" value="<%= task.getTaskId() %>"/>
                             <aui:input type="file" name="attachmentFile" label="" required="true" cssClass="mr-2"/>
                             <aui:button type="submit" value="Enviar Imagem" cssClass="btn btn-sm btn-info"/>
@@ -146,6 +156,7 @@
                                 <portlet:actionURL name="deleteTaskAttachment" var="deleteAttachmentURL">
                                     <portlet:param name="taskAttachmentId"
                                                    value="<%= String.valueOf(attachment.getTaskAttachmentId()) %>"/>
+                                    <portlet:param name="p_auth" value="<%= AuthTokenUtil.getToken(request) %>"/>
                                 </portlet:actionURL>
                                 <a href="<%= deleteAttachmentURL %>" class="btn btn-sm btn-outline-danger d-block mb-2">Remover
                                     Imagem</a>
@@ -158,6 +169,8 @@
                                         <portlet:actionURL name="updateTaskAttachment" var="updateAttachmentURL"/>
                                         <aui:form action="<%= updateAttachmentURL %>" method="post"
                                                   enctype="multipart/form-data" cssClass="d-flex flex-column">
+                                            <input type="hidden" name="p_auth"
+                                                   value="<%= AuthTokenUtil.getToken(request) %>"/>
                                             <aui:input name="taskAttachmentId" type="hidden"
                                                        value="<%= attachment.getTaskAttachmentId() %>"/>
                                             <aui:input type="file" name="attachmentFile" label="" required="true"
@@ -182,6 +195,7 @@
                             <portlet:param name="taskId" value="<%= String.valueOf(task.getTaskId()) %>"/>
                         </portlet:actionURL>
                         <aui:form action="<%= updateTaskURL %>" method="post" cssClass="mt-2">
+                            <input type="hidden" name="p_auth" value="<%= AuthTokenUtil.getToken(request) %>"/>
                             <aui:input name="title" label="Título" value="<%= task.getTitle() %>"/>
                             <aui:input name="description" label="Descrição" type="textarea"
                                        value="<%= task.getDescription() %>"/>
@@ -211,11 +225,13 @@
                     <div>
                         <portlet:actionURL name="toggleTaskStatus" var="reopenTaskURL">
                             <portlet:param name="taskId" value="<%= String.valueOf(task.getTaskId()) %>"/>
+                            <portlet:param name="p_auth" value="<%= AuthTokenUtil.getToken(request) %>"/>
                         </portlet:actionURL>
                         <a href="<%= reopenTaskURL %>" class="btn btn-sm btn-warning">Reabrir</a>
 
                         <portlet:actionURL name="deleteTask" var="deleteTaskURL">
                             <portlet:param name="taskId" value="<%= String.valueOf(task.getTaskId()) %>"/>
+                            <portlet:param name="p_auth" value="<%= AuthTokenUtil.getToken(request) %>"/>
                         </portlet:actionURL>
                         <a href="<%= deleteTaskURL %>" class="btn btn-sm btn-danger">Excluir</a>
                     </div>
